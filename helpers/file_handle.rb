@@ -15,7 +15,7 @@ module FileHandle
     base_url = CONFIG['docs_url']
     endpoint = base_url % {:file_id => file_id}
 
-    open("%s.html" % file_id, 'wb') do |file|
+    open("#{file_id}.html", 'wb') do |file|
       file << open(endpoint).read
     end
   end
