@@ -22,5 +22,5 @@ raise OptionParser::MissingArgument if options[:input].nil?
 
 if __FILE__ == $0
   file_id = FileHandle.get_file_id(options[:input])
-  html_file = FileHandle.download_file(file_id, options[:output])
+  html_file = FileHandle.download_file(file_id)
 end
