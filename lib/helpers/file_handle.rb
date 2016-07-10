@@ -1,6 +1,6 @@
 require "json"
-require "open-uri"
 require "yaml"
+require "open-uri"
 
 module FileHandle
   CONFIG = YAML.load_file('config/config.yml')
@@ -11,7 +11,8 @@ module FileHandle
     file_id = data_hash['doc_id']
   end
 
-  def download_file(file_id)
+  def download_file(file_name)
+    file_id = get_file_id(file_name)
     base_url = CONFIG['docs_url']
     endpoint = base_url % {:file_id => file_id}
 
@@ -20,4 +21,8 @@ module FileHandle
     end
   end
 
+  def html_to_md(filename)
+  end
+
+  private :get_file_id
 end
