@@ -1,6 +1,8 @@
 require "json"
 require "yaml"
 require "open-uri"
+require "nokogiri"
+require "reverse_markdown"
 
 module FileHandle
   CONFIG = YAML.load_file('config/config.yml')
@@ -19,10 +21,15 @@ module FileHandle
     open("#{file_id}.html", 'wb') do |file|
       file << open(endpoint).read
     end
+    return file_id
   end
 
-  def html_to_md(filename)
+  def html_to_md(file_name)
+    file = download_file(file_name)
+    file_s = Nokogiri::HTML(open("#{file}.html"))
+    to_markdown = ReverseMarkdown.convert file_s.css('span').to_s
+    puts to_markdown.inspect
   end
 
-  private :get_file_id
+  private :get_file_id, :download_file
 end

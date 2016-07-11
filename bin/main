@@ -2,7 +2,7 @@
 
 require 'optparse'
 
-require_relative 'helpers/file_handle'
+require_relative '../lib/helpers/file_handle'
 
 include FileHandle
 
@@ -23,6 +23,5 @@ raise OptionParser::MissingArgument unless options[:input] || options[:output]
 
 
 if __FILE__ == $0
-  #file_id = FileHandle.get_file_id(options[:input])
-  html_file = FileHandle.download_file(options[:input])
+  md_file = FileHandle.html_to_md options[:input]
 end
